@@ -15,6 +15,13 @@
 	<description>An assignment from EGS company</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-boot.version>2.5.4</spring-boot.version>
+		<jjwt.version>0.9.1</jjwt.version>
+		<liquibase.version>4.3.5</liquibase.version>
+		<liquibase-hibernate5.version>4.3.5</liquibase-hibernate5.version>
+		<h2.version>1.4.200</h2.version>
+		<validation-api.version>2.0.1.Final</validation-api.version>
+		<javassist.version>3.27.0-GA</javassist.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -36,6 +43,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -95,6 +107,60 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>${liquibase.version}</version>
+					<configuration>
+						<changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
+						<diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+						<driver>org.h2.Driver</driver>
+						<url>jdbc:h2:mem:egs</url>
+						<defaultSchemaName></defaultSchemaName>
+						<username>sa</username>
+						<password></password>
+						<referenceUrl>hibernate:spring:com.glinboy.assignment.egs.model?dialect=org.hibernate.dialect.H2Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+						<verbose>true</verbose>
+						<logging>debug</logging>
+						<contexts>!test</contexts>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.liquibase</groupId>
+							<artifactId>liquibase-core</artifactId>
+							<version>${liquibase.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.liquibase.ext</groupId>
+							<artifactId>liquibase-hibernate5</artifactId>
+							<version>${liquibase-hibernate5.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-starter-data-jpa</artifactId>
+							<version>${spring-boot.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>javax.validation</groupId>
+							<artifactId>validation-api</artifactId>
+							<version>${validation-api.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.javassist</groupId>
+							<artifactId>javassist</artifactId>
+							<version>${javassist.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>com.h2database</groupId>
+							<artifactId>h2</artifactId>
+							<version>${h2.version}</version>
+						</dependency>
+					</dependencies>
+					</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
