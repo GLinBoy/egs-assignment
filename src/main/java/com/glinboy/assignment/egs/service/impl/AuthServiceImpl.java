@@ -58,9 +58,6 @@ public class AuthServiceImpl implements AuthServiceApi {
 	@Override
 	public User signup(SignupRequestDTO signupRequestDTO) {
 		if (userRepository.existsByEmail(signupRequestDTO.getEmail()).booleanValue()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken!");
-		}
-		if (userRepository.existsByEmail(signupRequestDTO.getEmail()).booleanValue()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email Address already in use!");
 		}
 		User user = new User(null, signupRequestDTO.getFirstname(), signupRequestDTO.getLastname(), signupRequestDTO.getEmail(),
