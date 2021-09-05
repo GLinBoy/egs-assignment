@@ -30,7 +30,9 @@ import com.glinboy.assignment.egs.service.CommentServiceApi;
 import com.glinboy.assignment.egs.service.dto.CommentDTO;
 import com.glinboy.assignment.egs.util.PaginationUtil;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping(path = "/api/products/{product_id}/comments")
@@ -46,6 +48,7 @@ public class CommentRestController {
 	
 	@GetMapping
 	@PageableAsQueryParam
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<List<CommentDTO>> getAll(@Parameter(hidden = true) Pageable pageable, HttpServletRequest request,
 			@PathVariable(value = "product_id") Long productId) {
 		Page<CommentDTO> page = service.getAll(productId, pageable);
@@ -55,6 +58,7 @@ public class CommentRestController {
 	}
 
 	@PostMapping
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<CommentDTO> save(@Valid @RequestBody CommentDTO commentDTO, HttpServletRequest request,
 			@PathVariable(value = "product_id") Long productId) {
 		commentDTO.setProductId(productId);
@@ -64,6 +68,7 @@ public class CommentRestController {
 	}
 
 	@PutMapping
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<CommentDTO> update(@Valid @RequestBody CommentDTO commentDTO,
 			@PathVariable(value = "product_id") Long productId) {
 		if (commentDTO.getId() == null) {
@@ -75,6 +80,7 @@ public class CommentRestController {
 	}
 
 	@DeleteMapping("/{id}")
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<Void> deleteById(@PathVariable Long id,
 			@PathVariable(value = "product_id") Long productId) {
 		service.deleteSingleById(productId, id);
