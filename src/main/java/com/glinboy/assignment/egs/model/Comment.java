@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "COMMENT", uniqueConstraints = {
+@Table(name = "EGS_COMMENT", uniqueConstraints = {
 		@UniqueConstraint(columnNames = { "USER_ID", "PRODUCT_ID" }, name = "UNQ_COMMET_PRODUCT") })
 public class Comment extends BaseEntity {
 

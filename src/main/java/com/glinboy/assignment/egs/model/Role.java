@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ROLE")
+@Table(name = "EGS_ROLE")
 public class Role extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)

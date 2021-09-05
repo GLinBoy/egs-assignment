@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=true)
 @Entity
-@Table(name = "CATEGORY", uniqueConstraints = { @UniqueConstraint(columnNames = { "title" }, name = "UNQ_CATEGORY_TILE") })
+@Table(name = "EGS_CATEGORY", uniqueConstraints = { @UniqueConstraint(columnNames = { "title" }, name = "UNQ_CATEGORY_TILE") })
 public class Category extends BaseEntity {
 
 	@NotBlank

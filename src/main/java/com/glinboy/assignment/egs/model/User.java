@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "USER", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }, name = "UNQ_USER_EMAIL") })
+@Table(name = "EGS_USER", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }, name = "UNQ_USER_EMAIL") })
 public class User extends BaseEntity {
 
 	@NotBlank
@@ -53,7 +53,7 @@ public class User extends BaseEntity {
 	private Boolean blocked;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles",
+	@JoinTable(name = "EGS_USER_ROLES",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();

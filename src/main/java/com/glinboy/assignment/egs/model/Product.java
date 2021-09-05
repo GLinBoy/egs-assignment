@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "PRODUCT", uniqueConstraints = {
+@Table(name = "EGS_PRODUCT", uniqueConstraints = {
 		@UniqueConstraint(columnNames = { "title" }, name = "UNQ_PRODUCT_TILE") })
 public class Product extends BaseEntity {
 
