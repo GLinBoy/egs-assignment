@@ -3,6 +3,7 @@ package com.glinboy.assignment.egs.service.impl;
 import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.glinboy.assignment.egs.model.Category;
 import com.glinboy.assignment.egs.model.Product;
@@ -32,4 +33,11 @@ public class ProductServiceImpl
 		product = this.repository.save(product);
 		return this.mapper.toDto(product);
 	}
+
+	@Override
+	@Transactional
+	public void updateUserRate(Long productId, Short oldRate, Short newRate) {
+		this.repository.updateUserRateByProductId(productId, oldRate, newRate);
+	}
+
 }
