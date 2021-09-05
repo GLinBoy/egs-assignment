@@ -77,6 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(whitelist).permitAll()
 			.antMatchers(HttpMethod.GET, "/api/categories/**").authenticated()
 			.antMatchers("/api/categories/**").hasRole("ADMIN")
+			.antMatchers(HttpMethod.GET, "/api/products/**").authenticated()
+			.antMatchers("/api/products/**").hasRole("ADMIN")
 			.anyRequest().authenticated();
 
 		// Add our custom JWT security filter
