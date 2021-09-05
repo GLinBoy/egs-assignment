@@ -24,6 +24,7 @@
 		<javassist.version>3.27.0-GA</javassist.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<springdoc.version>1.5.10</springdoc.version>
+		<problem.version>0.26.2</problem.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -69,6 +70,11 @@
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-security</artifactId>
 			<version>${springdoc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>problem-spring-web</artifactId>
+			<version>${problem.version}</version>
 		</dependency>
 
 		<dependency>
