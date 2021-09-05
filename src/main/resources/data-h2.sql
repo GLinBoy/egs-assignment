@@ -1,0 +1,10 @@
+-- Default password for john.doe@gmail.com is: asd@123456
+INSERT INTO EGS_USER("ID", "EMAIL", "FIRSTNAME", "LASTNAME", "PASSWORD", "BLOCKED") VALUES
+(10001, 'john.doe@gmail.com', 'Jane', 'Doe', '$2a$10$Zj38WYKI.gGbhQWuATpY2.nI8CowD/ujyC7c2MozoyMBGNi8z6bui', FALSE);
+
+INSERT INTO EGS_ROLE(id, name) VALUES(10001, 'ROLE_USER');
+INSERT INTO EGS_ROLE(id, name) VALUES(10002, 'ROLE_ADMIN');
+
+INSERT INTO EGS_USER_ROLES(USER_ID, ROLE_ID) VALUES
+	(10001, 10001),
+	(10001, 10002);

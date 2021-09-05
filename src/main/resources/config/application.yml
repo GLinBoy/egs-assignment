@@ -1,10 +1,23 @@
 spring:
-  jpa:
-    properties:
-      hibernate.jdbc.time_zone: UTC
   profiles:
     active: dev
   liquibase:
     change-log: classpath:config/liquibase/master.xml
+  web:
+    resources:
+      add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
 server:
   port: 8080
+  servlet:
+    encoding:
+      force: true
+info:
+  app:
+    name: EGS Assignment
+    description: An assignmet for Hojjat Abedi by ESG
+    version: 1.0.0
+    license: MIT
+    license-url: https://github.com/GLinBoy/egs-assignment/LICENSE.md
+    github-url: https://github.com/GLinBoy/egs-assignment
