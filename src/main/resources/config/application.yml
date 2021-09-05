@@ -17,7 +17,7 @@ info:
   app:
     name: EGS Assignment
     description: An assignmet for Hojjat Abedi by ESG
-    version: 1.0.0
+    version: 1.0.1
     license: MIT
     license-url: https://github.com/GLinBoy/egs-assignment/LICENSE.md
     github-url: https://github.com/GLinBoy/egs-assignment
