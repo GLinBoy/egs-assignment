@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.glinboy.assignment</groupId>
 	<artifactId>egs</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>EGS Assignment</name>
 	<description>An assignment from EGS company</description>
 	<properties>
