@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
-    <changeSet author="hojjat (generated)" id="1630787518160-1">
+    <changeSet author="hojjat (generated)" id="1630826165396-1">
         <createTable tableName="category">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="categoryPK"/>
@@ -8,7 +8,21 @@
             <column name="title" type="VARCHAR(40)"/>
         </createTable>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-2">
+    <changeSet author="hojjat (generated)" id="1630826165396-2">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="productPK"/>
+            </column>
+            <column name="descriptiuon" type="VARCHAR(256)"/>
+            <column name="image" type="VARCHAR(128)"/>
+            <column name="price" type="DECIMAL(8, 2)"/>
+            <column name="title" type="VARCHAR(40)"/>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hojjat (generated)" id="1630826165396-3">
         <createTable tableName="role">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="rolePK"/>
@@ -16,7 +30,7 @@
             <column name="name" type="VARCHAR(60)"/>
         </createTable>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-3">
+    <changeSet author="hojjat (generated)" id="1630826165396-4">
         <createTable tableName="user">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="userPK"/>
@@ -27,7 +41,7 @@
             <column name="password" type="VARCHAR(100)"/>
         </createTable>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-4">
+    <changeSet author="hojjat (generated)" id="1630826165396-5">
         <createTable tableName="user_roles">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -37,19 +51,25 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-5">
+    <changeSet author="hojjat (generated)" id="1630826165396-6">
         <addUniqueConstraint columnNames="name" constraintName="UK_epk9im9l9q67xmwi4hbed25do" tableName="role"/>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-6">
+    <changeSet author="hojjat (generated)" id="1630826165396-7">
         <addUniqueConstraint columnNames="title" constraintName="UNQ_CATEGORY_TILE" tableName="category"/>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-7">
+    <changeSet author="hojjat (generated)" id="1630826165396-8">
+        <addUniqueConstraint columnNames="title" constraintName="UNQ_PRODUCT_TILE" tableName="product"/>
+    </changeSet>
+    <changeSet author="hojjat (generated)" id="1630826165396-9">
         <addUniqueConstraint columnNames="email" constraintName="UNQ_USER_EMAIL" tableName="user"/>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-8">
+    <changeSet author="hojjat (generated)" id="1630826165396-10">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="FK55itppkw3i07do3h7qoclqd4k" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user" validate="true"/>
     </changeSet>
-    <changeSet author="hojjat (generated)" id="1630787518160-9">
+    <changeSet author="hojjat (generated)" id="1630826165396-11">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="product" constraintName="FK_PRODUCT_CATEGORY" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category" validate="true"/>
+    </changeSet>
+    <changeSet author="hojjat (generated)" id="1630826165396-12">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_roles" constraintName="FKrhfovtciq1l558cw6udg0h0d3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role" validate="true"/>
     </changeSet>
 </databaseChangeLog>
