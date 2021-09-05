@@ -27,5 +27,8 @@ public class UserDTO extends BaseDTO {
 	@Email
 	private String email;
 
+	@NotBlank
+	private Boolean blocked;
+
 	private Set<RoleDTO> roles = new HashSet<>();
 }
