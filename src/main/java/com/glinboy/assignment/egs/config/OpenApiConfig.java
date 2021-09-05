@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.glinboy.assignment.egs.util.ApplicationInformation;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -13,6 +15,10 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
+@SecurityScheme(name = "bearerAuth",
+	type = SecuritySchemeType.HTTP,
+	bearerFormat = "JWT",
+	scheme = "bearer")
 public class OpenApiConfig {
 
 	private final ApplicationInformation info;
@@ -20,13 +26,8 @@ public class OpenApiConfig {
 	@Bean
 	public OpenAPI springShopOpenAPI() {
 		return new OpenAPI()
-				.info(new Info().title(info.getName())
-						.description(info.getDescription())
-						.version(info.getVersion())
-						.license(new License().name(info.getLicense())
-								.url(info.getLicenseUrl())))
-				.externalDocs(new ExternalDocumentation()
-						.description("Source code")
-						.url(info.getGithubUrl()));
+				.info(new Info().title(info.getName()).description(info.getDescription()).version(info.getVersion())
+						.license(new License().name(info.getLicense()).url(info.getLicenseUrl())))
+				.externalDocs(new ExternalDocumentation().description("Source code").url(info.getGithubUrl()));
 	}
 }

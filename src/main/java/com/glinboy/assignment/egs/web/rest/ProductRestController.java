@@ -22,7 +22,9 @@ import com.glinboy.assignment.egs.service.dto.ProductDTO;
 import com.glinboy.assignment.egs.util.PaginationUtil;
 import com.sipios.springsearch.anotation.SearchSpec;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping(path = "/api/products")
@@ -34,6 +36,7 @@ public class ProductRestController extends GenericRestController<ProductDTO, Pro
 	
 	@GetMapping("search")
 	@PageableAsQueryParam
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<List<ProductDTO>> searchProducts(@Parameter(hidden = true) @SearchSpec Specification<Product> specs,
 			@Parameter(hidden = true) Pageable pageable, HttpServletRequest request) {
 		Page<ProductDTO> page = service.searchProducts(specs, pageable);

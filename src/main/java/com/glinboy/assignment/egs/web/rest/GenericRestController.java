@@ -28,7 +28,9 @@ import com.glinboy.assignment.egs.service.GenericService;
 import com.glinboy.assignment.egs.service.dto.BaseDTO;
 import com.glinboy.assignment.egs.util.PaginationUtil;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -40,6 +42,7 @@ public abstract class GenericRestController<T extends BaseDTO, S extends Generic
 
 	@GetMapping
 	@PageableAsQueryParam
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<List<T>> getAll(@Parameter(hidden = true) Pageable pageable, HttpServletRequest request) {
 		Page<T> page = service.getAll(pageable);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, request.getRequestURI());
@@ -48,12 +51,14 @@ public abstract class GenericRestController<T extends BaseDTO, S extends Generic
 	}
 
 	@GetMapping("/{id}")
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<T> getById(@PathVariable Long id) {
 		T entity = service.getSingleById(id);
 		return ResponseEntity.ok().body(entity);
 	}
 
 	@PostMapping
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<T> save(@Valid @RequestBody T entity, HttpServletRequest request) {
 		T savedEntity = service.save(entity);
 		URI location = URI.create(String.format("%s/%s", request.getRequestURI(), savedEntity.getId()));
@@ -61,6 +66,7 @@ public abstract class GenericRestController<T extends BaseDTO, S extends Generic
 	}
 
 	@PutMapping
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<T> update(@Valid @RequestBody T entity) {
 		if (entity.getId() == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, messages.getString("common.error.empty.id"));
@@ -70,6 +76,7 @@ public abstract class GenericRestController<T extends BaseDTO, S extends Generic
 	}
 
 	@DeleteMapping("/{id}")
+	@Operation(security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
 		service.deleteSingleById(id);
 		return ResponseEntity.noContent().build();
