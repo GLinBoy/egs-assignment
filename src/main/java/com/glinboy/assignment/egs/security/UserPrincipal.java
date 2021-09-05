@@ -34,6 +34,8 @@ public class UserPrincipal implements UserDetails {
 	@JsonIgnore
 	private String password;
 
+	private boolean blocked; 
+
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public static UserPrincipal create(User user) {
@@ -46,6 +48,7 @@ public class UserPrincipal implements UserDetails {
 				user.getLastname(),
 				user.getEmail(),
 				user.getPassword(),
+				user.getBlocked().booleanValue(),
 				authorities);
 	}
 
@@ -71,8 +74,7 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// FIXME Check with banned feature
-		return true;
+		return !blocked;
 	}
 
 	@Override
