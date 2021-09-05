@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -29,6 +30,8 @@ import com.glinboy.assignment.egs.service.CommentServiceApi;
 import com.glinboy.assignment.egs.service.dto.CommentDTO;
 import com.glinboy.assignment.egs.util.PaginationUtil;
 
+import io.swagger.v3.oas.annotations.Parameter;
+
 @RestController
 @RequestMapping(path = "/api/products/{product_id}/comments")
 public class CommentRestController {
@@ -42,7 +45,8 @@ public class CommentRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<CommentDTO>> getAll(Pageable pageable, HttpServletRequest request,
+	@PageableAsQueryParam
+	public ResponseEntity<List<CommentDTO>> getAll(@Parameter(hidden = true) Pageable pageable, HttpServletRequest request,
 			@PathVariable(value = "product_id") Long productId) {
 		Page<CommentDTO> page = service.getAll(productId, pageable);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, request.getRequestURI());

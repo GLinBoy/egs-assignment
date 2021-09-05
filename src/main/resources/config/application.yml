@@ -5,3 +5,11 @@ spring:
     change-log: classpath:config/liquibase/master.xml
 server:
   port: 8080
+info:
+  app:
+    name: EGS Assignment
+    description: An assignmet for Hojjat Abedi by ESG
+    version: 0.0.1-SNAPSHOT
+    license: MIT
+    license-url: https://github.com/GLinBoy/egs-assignment/LICENSE.md
+    github-url: https://github.com/GLinBoy/egs-assignment

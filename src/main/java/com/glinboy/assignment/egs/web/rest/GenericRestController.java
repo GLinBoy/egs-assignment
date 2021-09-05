@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +28,7 @@ import com.glinboy.assignment.egs.service.GenericService;
 import com.glinboy.assignment.egs.service.dto.BaseDTO;
 import com.glinboy.assignment.egs.util.PaginationUtil;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -37,7 +39,8 @@ public abstract class GenericRestController<T extends BaseDTO, S extends Generic
 	protected final S service;
 
 	@GetMapping
-	public ResponseEntity<List<T>> getAll(Pageable pageable, HttpServletRequest request) {
+	@PageableAsQueryParam
+	public ResponseEntity<List<T>> getAll(@Parameter(hidden = true) Pageable pageable, HttpServletRequest request) {
 		Page<T> page = service.getAll(pageable);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, request.getRequestURI());
 		headers.setAccessControlExposeHeaders(Arrays.asList(HttpHeaders.LINK, "X-Total-Count"));

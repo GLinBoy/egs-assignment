@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new JwtAuthenticationFilter(tokenProvider, customUserDetailsService);
 	}
 
-	private final String[] whitelist = { "/api/auth/**", "/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**" };
+	private final String[] whitelist = { "/api/auth/**", "/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html" };
 
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {

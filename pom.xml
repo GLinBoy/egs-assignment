@@ -23,6 +23,7 @@
 		<validation-api.version>2.0.1.Final</validation-api.version>
 		<javassist.version>3.27.0-GA</javassist.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
+		<springdoc.version>1.5.10</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -58,6 +59,16 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>${springdoc.version}</version>
 		</dependency>
 
 		<dependency>
