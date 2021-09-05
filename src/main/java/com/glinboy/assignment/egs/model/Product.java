@@ -46,6 +46,8 @@ public class Product extends BaseEntity {
 	@Size(max = 128)
 	private String image;
 
+	private Long rate = 0L;
+
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY_ID", nullable = false,
 		foreignKey = @ForeignKey(name = "FK_PRODUCT_CATEGORY"))

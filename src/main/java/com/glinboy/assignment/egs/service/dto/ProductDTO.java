@@ -28,6 +28,8 @@ public class ProductDTO extends BaseDTO {
 
 	@Size(max = 128)
 	private String image;
+	
+	private Long rate = 0L;
 
 	@NotNull
 	private Long categoryId;
