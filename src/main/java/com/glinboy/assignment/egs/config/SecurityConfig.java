@@ -2,6 +2,7 @@ package com.glinboy.assignment.egs.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -74,6 +75,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 			.antMatchers(whitelist).permitAll()
+			.antMatchers(HttpMethod.GET, "/api/categories/**").authenticated()
+			.antMatchers("/api/categories/**").hasRole("ADMIN")
 			.anyRequest().authenticated();
 
 		// Add our custom JWT security filter
