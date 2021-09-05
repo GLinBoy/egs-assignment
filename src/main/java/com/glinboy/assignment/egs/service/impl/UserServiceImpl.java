@@ -1,6 +1,7 @@
 package com.glinboy.assignment.egs.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.glinboy.assignment.egs.model.User;
 import com.glinboy.assignment.egs.repository.UserRepository;
@@ -15,6 +16,18 @@ public class UserServiceImpl
 
 	public UserServiceImpl(UserRepository repository, UserMapper mapper) {
 		super(repository, mapper);
+	}
+
+	@Override
+	@Transactional
+	public void block(Long id) {
+		this.repository.updateUserBlockStatus(id, Boolean.TRUE);
+	}
+
+	@Override
+	@Transactional
+	public void unblock(Long id) {
+		this.repository.updateUserBlockStatus(id, Boolean.FALSE);
 	}
 
 }
