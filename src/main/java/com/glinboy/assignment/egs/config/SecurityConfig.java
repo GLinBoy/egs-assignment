@@ -76,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers(whitelist).permitAll()
 			.antMatchers(HttpMethod.GET, "/api/categories/**").authenticated()
+			.antMatchers("/api/products/{\\d+}/comments/**").authenticated()
 			.antMatchers("/api/categories/**").hasRole("ADMIN")
 			.antMatchers(HttpMethod.GET, "/api/products/**").authenticated()
 			.antMatchers("/api/products/**").hasRole("ADMIN")
