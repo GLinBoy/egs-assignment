@@ -60,7 +60,7 @@ public class AuthServiceImpl implements AuthServiceApi {
 		if (userRepository.existsByEmail(signupRequestDTO.getEmail()).booleanValue()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email Address already in use!");
 		}
-		User user = new User(null, signupRequestDTO.getFirstname(), signupRequestDTO.getLastname(), signupRequestDTO.getEmail(),
+		User user = new User(signupRequestDTO.getFirstname(), signupRequestDTO.getLastname(), signupRequestDTO.getEmail(),
 				signupRequestDTO.getPassword(), Collections.emptySet());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
