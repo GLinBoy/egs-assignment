@@ -73,14 +73,14 @@
 			<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.zalando</groupId>
-			<artifactId>problem-spring-web</artifactId>
-			<version>${problem.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>cz.jirutka.rsql</groupId>
 			<artifactId>rsql-parser</artifactId>
 			<version>${rsql-parser.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>problem-spring-web-starter</artifactId>
+			<version>${problem.version}</version>
 		</dependency>
 
 		<dependency>
