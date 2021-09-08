@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.glinboy.assignment</groupId>
 	<artifactId>egs</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.3</version>
 	<name>EGS Assignment</name>
 	<description>An assignment from EGS company</description>
 	<properties>
@@ -25,7 +25,7 @@
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<springdoc.version>1.5.10</springdoc.version>
 		<problem.version>0.26.2</problem.version>
-		<spring-search.version>0.2.4</spring-search.version>
+		<rsql-parser.version>2.1.0</rsql-parser.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -73,14 +73,14 @@
 			<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.zalando</groupId>
-			<artifactId>problem-spring-web</artifactId>
-			<version>${problem.version}</version>
+			<groupId>cz.jirutka.rsql</groupId>
+			<artifactId>rsql-parser</artifactId>
+			<version>${rsql-parser.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sipios</groupId>
-			<artifactId>spring-search</artifactId>
-			<version>${spring-search.version}</version>
+			<groupId>org.zalando</groupId>
+			<artifactId>problem-spring-web-starter</artifactId>
+			<version>${problem.version}</version>
 		</dependency>
 
 		<dependency>

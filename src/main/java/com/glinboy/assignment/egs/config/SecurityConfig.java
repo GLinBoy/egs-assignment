@@ -14,9 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
 import com.glinboy.assignment.egs.security.CustomUserDetailsService;
-import com.glinboy.assignment.egs.security.JwtAuthenticationEntryPoint;
 import com.glinboy.assignment.egs.security.JwtAuthenticationFilter;
 import com.glinboy.assignment.egs.security.JwtTokenProvider;
 
@@ -27,16 +27,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final CustomUserDetailsService customUserDetailsService;
 
-	private final JwtAuthenticationEntryPoint unauthorizedHandler;
-	
 	private final JwtTokenProvider tokenProvider;
 
+	private final SecurityProblemSupport problemSupport;
+
 	public SecurityConfig(CustomUserDetailsService customUserDetailsService,
-			JwtAuthenticationEntryPoint unauthorizedHandler,
-			JwtTokenProvider tokenProvider) {
+			JwtTokenProvider tokenProvider,
+			SecurityProblemSupport problemSupport) {
 		this.customUserDetailsService = customUserDetailsService;
-		this.unauthorizedHandler = unauthorizedHandler;
 		this.tokenProvider = tokenProvider;
+		this.problemSupport = problemSupport;
 	}
 
 	@Bean
@@ -44,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new JwtAuthenticationFilter(tokenProvider, customUserDetailsService);
 	}
 
-	private final String[] whitelist = {"/", "/api/auth/**", "/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html" };
+	private final String[] whitelist = { "/", "/api/auth/**", "/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**",
+			"/swagger-ui.html" };
 
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -69,7 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors()
 			.and()
 			.csrf().disable()
-			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+			.exceptionHandling()
+			.authenticationEntryPoint(problemSupport)
+			.accessDeniedHandler(problemSupport)
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
