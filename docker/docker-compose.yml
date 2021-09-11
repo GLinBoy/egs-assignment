@@ -1,0 +1,14 @@
+version: '3'
+services:
+  PostgreSQL13:
+    container_name: PostgreSQL13
+    image: "postgres:13.3" # use latest official postgres version
+    env_file:
+      - database.env # configure postgres
+    volumes:
+      - data:/var/lib/postgresql/data/ # persist data even if container shuts downvolumes:
+    ports:
+      - 5432:5432
+
+  volumes:
+     data:
